@@ -1,0 +1,55 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}Categories - PNNA Global{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Shop by Category</h1>
+
+    <div class="row">
+        {% for category in categories %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <a href="{% url 'category_products' category.slug %}" class="text-decoration-none">
+                <div class="category-card p-5 rounded text-center category-hover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; cursor: pointer;">
+                    <i class="bi bi-tag" style="font-size: 3rem; display: block; margin-bottom: 20px;"></i>
+                    <h3 class="mb-2">{{ category.name }}</h3>
+                    <p class="lead">{{ category.products.count }} Products</p>
+                    <span class="btn btn-light btn-sm">Shop Now →</span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if categories.has_other_pages %}
+    <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mt-5">
+            {% if categories.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">First</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ categories.previous_page_number }}">Previous</a>
+            </li>
+            {% endif %}
+
+            {% for num in categories.paginator.page_range %}
+            <li class="page-item {% if num == categories.number %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+            </li>
+            {% endfor %}
+
+            {% if categories.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ categories.next_page_number }}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ categories.paginator.num_pages }}">Last</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

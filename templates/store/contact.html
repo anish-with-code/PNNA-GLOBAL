@@ -1,0 +1,109 @@
+{% extends 'store/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Contact Us - PNNA Global{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-5 text-center">Contact Us</h1>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="bi bi-whatsapp fs-1 text-success mb-3"></i>
+                    <h5 class="card-title">WhatsApp</h5>
+                    <p class="text-muted">Quick chat support</p>
+                    <a href="https://wa.me/917359508044" target="_blank" class="btn btn-success">Message Us</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="bi bi-instagram fs-1 text-danger mb-3"></i>
+                    <h5 class="card-title">Instagram</h5>
+                    <p class="text-muted">Follow for updates</p>
+                    <a href="https://instagram.com/pnnaglobal" target="_blank" class="btn btn-danger">Follow</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <i class="bi bi-envelope fs-1 text-primary mb-3"></i>
+                    <h5 class="card-title">Email</h5>
+                    <p class="text-muted">Get back within 24hrs</p>
+                    <a href="mailto:info@pnnaglobal.com" class="btn btn-primary">Email Us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5">
+
+    <div class="row">
+        <div class="col-md-6">
+            <h3 class="mb-4">Send us a Message</h3>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-danger btn-lg w-100">Send Message</button>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3 class="mb-4">Frequently Asked Questions</h3>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            What are the delivery times?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We deliver within 3-5 business days across India. Remote areas may take 5-7 days.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Do you offer returns?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes! We offer returns within 7 days of delivery. Contact us on WhatsApp for the process.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Is Cash on Delivery available?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes! We offer Cash on Delivery for all orders across India.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Are your products original?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            100% original! All products are authentic with quality guarantee.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

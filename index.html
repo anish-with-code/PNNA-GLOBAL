@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNNA Global - Luxury Fashion Jewellery</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1>PNNA GLOBAL</h1>
+                    <p>Luxury Fashion Jewellery</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search products...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button class="cart-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <button class="filter-btn active" onclick="filterProducts('all')">All Products</button>
+            <button class="filter-btn" onclick="filterProducts('western')">Western</button>
+            <button class="filter-btn" onclick="filterProducts('ethnic')">Ethnic</button>
+            <button class="filter-btn" onclick="filterProducts('bestseller')">Best Sellers</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container main">
+        <section class="products-section">
+            <h2>Our Collection</h2>
+            <div class="products-grid" id="productsGrid">
+                <!-- Products will be loaded here by JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Shopping Cart</h3>
+            <button class="close-btn" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Your cart is empty</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <strong>Total: ₹<span id="cartTotal">0</span></strong>
+            </div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to WhatsApp</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p>📱 WhatsApp: +91 73595 08044</p>
+                    <p>📷 Instagram: @pnnaglobal</p>
+                    <p>🌐 Website: pnna-global.netlify.app</p>
+                </div>
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <p>Luxury Fashion Jewellery for every occasion. Premium quality, affordable prices.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Policy</h4>
+                    <p>✅ Free Delivery Across India</p>
+                    <p>✅ All Prices Inclusive of Taxes</p>
+                    <p>✅ Secure Transactions</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PNNA Global. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">×</button>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="">
+                <div class="modal-info">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalCategory"></p>
+                    <div class="price-info">
+                        <span class="discount-price">₹<span id="modalPrice"></span></span>
+                        <span class="original-price">MRP ₹<span id="modalMRP"></span></span>
+                        <span class="discount-badge"><span id="modalDiscount"></span>% OFF</span>
+                    </div>
+                    <p id="modalDescription" class="description"></p>
+                    <button class="add-to-cart-btn" onclick="addFromModal()">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

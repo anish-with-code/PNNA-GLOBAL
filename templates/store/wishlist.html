@@ -1,0 +1,60 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}My Wishlist - PNNA Global{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">My Wishlist</h1>
+
+    {% if wishlist.products.all %}
+    <div class="row">
+        {% for product in wishlist.products.all %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="product-card card h-100 shadow-sm">
+                <div class="product-image-wrapper position-relative">
+                    {% if product.images.all %}
+                    <img src="{{ product.images.all.0.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 250px; object-fit: cover;">
+                    {% else %}
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 250px;">
+                        <i class="bi bi-image fs-1 text-muted"></i>
+                    </div>
+                    {% endif %}
+                    {% if product.discount_percentage %}
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2">-{{ product.discount_percentage }}%</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">{{ product.name }}</h6>
+                    <p class="card-text small text-muted">{{ product.description|truncatewords:10 }}</p>
+                    <div class="price-section mb-3">
+                        <span class="text-danger fw-bold fs-5">₹{{ product.price }}</span>
+                        <span class="text-muted text-decoration-line-through small ms-2">₹{{ product.mrp }}</span>
+                    </div>
+                    {% if product.is_in_stock %}
+                    <span class="badge bg-success mb-3">In Stock</span>
+                    {% else %}
+                    <span class="badge bg-danger mb-3">Out of Stock</span>
+                    {% endif %}
+                </div>
+                <div class="card-footer bg-white">
+                    <a href="{% url 'product_detail' product.slug %}" class="btn btn-sm btn-outline-danger w-100 mb-2">View Details</a>
+                    <form method="post" action="{% url 'add_to_cart' product.slug %}" class="d-inline-block w-100">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger w-100">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="alert alert-info text-center py-5">
+        <i class="bi bi-heart-break fs-1 mb-3"></i>
+        <p class="lead">Your wishlist is empty</p>
+        <p class="text-muted mb-3">Add products to your wishlist to save them for later</p>
+        <a href="{% url 'products' %}" class="btn btn-primary btn-lg">Explore Products</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

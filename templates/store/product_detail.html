@@ -1,0 +1,174 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.name }} - PNNA Global{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'products' %}">Products</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'category_products' product.category.slug %}">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active">{{ product.name|truncatewords:5 }}</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div id="productImageCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in images %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.alt_text }}" style="height: 500px; object-fit: cover;">
+                    </div>
+                    {% endfor %}
+                </div>
+                {% if images.count > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+                {% endif %}
+            </div>
+
+            {% if images.count > 1 %}
+            <div class="row">
+                {% for image in images %}
+                <div class="col-md-3 mb-2">
+                    <img src="{{ image.image.url }}" class="img-thumbnail cursor-pointer" alt="Thumbnail" style="cursor: pointer; height: 100px; object-fit: cover;" onclick="document.querySelector('#productImageCarousel').addEventListener('slide.bs.carousel', e => {})">
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <div class="badge bg-info mb-2">{{ product.get_product_type_display }}</div>
+            {% if product.is_bestseller %}
+            <div class="badge bg-success mb-2 ms-1">Best Seller</div>
+            {% endif %}
+            {% if product.is_new %}
+            <div class="badge bg-warning mb-2 ms-1">New Arrival</div>
+            {% endif %}
+
+            <h1 class="mb-2">{{ product.name }}</h1>
+
+            <div class="rating mb-3">
+                <span class="text-warning"><i class="bi bi-star-fill"></i></span>
+                <span>{{ product.rating }} / 5.0</span>
+            </div>
+
+            <div class="price-section mb-4 p-3 bg-light rounded">
+                <div class="mb-2">
+                    <span class="text-muted">Price: </span>
+                    <span class="text-danger fs-4 fw-bold">₹{{ product.price }}</span>
+                </div>
+                <div class="mb-2">
+                    <span class="text-muted">MRP: </span>
+                    <span class="text-muted text-decoration-line-through">₹{{ product.mrp }}</span>
+                </div>
+                {% if product.discount_percentage %}
+                <div>
+                    <span class="badge bg-danger">Save {{ product.discount_percentage }}%</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="stock-status mb-4">
+                {% if product.is_in_stock %}
+                <p class="text-success fw-bold mb-2">✓ In Stock ({{ product.stock }} available)</p>
+                {% else %}
+                <p class="text-danger fw-bold mb-2">✗ Out of Stock</p>
+                {% endif %}
+            </div>
+
+            <div class="description mb-4">
+                <h5>Description</h5>
+                <p>{{ product.description }}</p>
+            </div>
+
+            {% if product.is_in_stock %}
+            <form method="post" action="{% url 'add_to_cart' product.slug %}" class="mb-4">
+                {% csrf_token %}
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Quantity</span>
+                    <input type="number" name="quantity" class="form-control" value="1" min="1" max="{{ product.stock }}">
+                    <span class="input-group-text">/ {{ product.stock }} available</span>
+                </div>
+
+                {% if user.is_authenticated %}
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-danger btn-lg mb-2">
+                        <i class="bi bi-cart"></i> Add to Cart
+                    </button>
+                    <a href="{% url 'add_to_wishlist' product.slug %}" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-heart"></i> Add to Wishlist
+                    </a>
+                </div>
+                {% else %}
+                <div class="d-grid gap-2">
+                    <a href="{% url 'login' %}?next={% url 'product_detail' product.slug %}" class="btn btn-danger btn-lg mb-2">
+                        <i class="bi bi-cart"></i> Add to Cart
+                    </a>
+                    <a href="{% url 'login' %}?next={% url 'product_detail' product.slug %}" class="btn btn-outline-secondary btn-lg">
+                        <i class="bi bi-heart"></i> Add to Wishlist
+                    </a>
+                </div>
+                {% endif %}
+            </form>
+            {% else %}
+            <button class="btn btn-secondary btn-lg w-100 mb-3" disabled>Out of Stock</button>
+            {% endif %}
+
+            <div class="info-box p-3 border rounded mb-3">
+                <p class="mb-0"><i class="bi bi-truck"></i> <strong>Free Delivery</strong> - All orders across India</p>
+            </div>
+
+            <div class="info-box p-3 border rounded">
+                <p class="mb-0"><i class="bi bi-whatsapp"></i> <strong>Need Help?</strong> <a href="https://wa.me/917359508044" target="_blank">WhatsApp us</a></p>
+            </div>
+        </div>
+    </div>
+
+    {% if related_products %}
+    <div class="row mt-5 pt-5 border-top">
+        <div class="col-12">
+            <h3 class="mb-4">Related Products</h3>
+        </div>
+        {% for related in related_products %}
+        <div class="col-md-6 col-lg-3 mb-4">
+            <div class="product-card card h-100 shadow-sm product-hover">
+                <div class="product-image-wrapper position-relative">
+                    {% if related.images.all %}
+                    <img src="{{ related.images.all.0.image.url }}" class="card-img-top" alt="{{ related.name }}" style="height: 200px; object-fit: cover;">
+                    {% else %}
+                    <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                        <i class="bi bi-image fs-1 text-muted"></i>
+                    </div>
+                    {% endif %}
+                    {% if related.discount_percentage %}
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2">-{{ related.discount_percentage }}%</span>
+                    {% endif %}
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">{{ related.name|truncatewords:5 }}</h6>
+                    <div class="price-section mb-2">
+                        <span class="text-danger fw-bold">₹{{ related.price }}</span>
+                        <span class="text-muted text-decoration-line-through small">₹{{ related.mrp }}</span>
+                    </div>
+                </div>
+                <div class="card-footer bg-white border-top">
+                    <a href="{% url 'product_detail' related.slug %}" class="btn btn-sm btn-outline-danger w-100">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

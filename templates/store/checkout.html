@@ -1,0 +1,70 @@
+{% extends 'store/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Checkout - PNNA Global{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <h1 class="mb-4">Checkout</h1>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">Delivery Details</h5>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+
+                        <button type="submit" class="btn btn-danger btn-lg w-100">
+                            <i class="bi bi-credit-card"></i> Place Order
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Order Summary</h5>
+                    <hr>
+
+                    {% for item in cart.items.all %}
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>{{ item.product.name }} x {{ item.quantity }}</span>
+                        <span>₹{{ item.subtotal }}</span>
+                    </div>
+                    {% endfor %}
+
+                    <hr>
+
+                    <div class="d-flex justify-content-between fw-bold fs-5 mb-3">
+                        <span>Total:</span>
+                        <span class="text-danger">₹{{ cart.total_price }}</span>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <small>
+                            <i class="bi bi-check-circle"></i> Free delivery<br>
+                            <i class="bi bi-lock"></i> Secure payment<br>
+                            <i class="bi bi-clock"></i> Delivery in 3-5 days
+                        </small>
+                    </div>
+
+                    <div class="payment-methods">
+                        <h6>Payment Method</h6>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="payment" id="cod" checked>
+                            <label class="form-check-label" for="cod">
+                                Cash on Delivery
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

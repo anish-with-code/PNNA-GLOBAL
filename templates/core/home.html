@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - LuxuryJewels{% endblock %}
+
+{% block content %}
+<!-- Hero Banner -->
+<section class="hero-banner bg-dark text-light text-center py-5" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);">
+    <div class="container">
+        <div class="py-5">
+            <h1 class="display-3 fw-bold mb-3 text-warning">Luxury Jewelry</h1>
+            <p class="lead mb-4">Discover Premium Gold & Diamond Collections</p>
+            <a href="#products" class="btn btn-warning btn-lg">Shop Now</a>
+        </div>
+    </div>
+</section>
+
+<!-- Categories Section -->
+<section class="categories py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Browse by Category</h2>
+        <div class="row">
+            {% for category in categories %}
+            <div class="col-md-3 mb-4">
+                <div class="card border-0 shadow-sm category-card h-100">
+                    <div class="card-body text-center">
+                        <i class="fas fa-ring text-warning" style="font-size: 3rem;"></i>
+                        <h5 class="card-title mt-3">{{ category.name }}</h5>
+                        <p class="card-text text-muted">{{ category.products.count }} Products</p>
+                        <a href="?category={{ category.id }}" class="btn btn-sm btn-outline-warning">View</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products -->
+<section class="featured-products py-5" id="products">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Featured Products</h2>
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card product-card border-0 shadow-sm h-100">
+                    <div class="product-image-wrapper position-relative">
+                        {% if product.images.exists %}
+                        <img src="{{ product.images.0.image.url }}" alt="{{ product.name }}" class="card-img-top">
+                        {% else %}
+                        <div class="bg-secondary" style="height: 250px;"></div>
+                        {% endif %}
+                        {% if product.discount_price %}
+                        <span class="badge bg-danger position-absolute top-0 end-0 m-2">-{{ product.get_discount_percentage }}%</span>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title fw-bold">{{ product.name }}</h6>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                {% if product.discount_price %}
+                                <span class="text-warning fw-bold">₹{{ product.discount_price }}</span>
+                                <span class="text-muted text-decoration-line-through small">₹{{ product.price }}</span>
+                                {% else %}
+                                <span class="text-warning fw-bold">₹{{ product.price }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-warning btn-sm add-to-cart-btn" data-product-id="{{ product.id }}">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p class="text-muted">No featured products available</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Latest Products -->
+<section class="latest-products py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5 fw-bold">Latest Products</h2>
+        <div class="row">
+            {% for product in latest_products %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card product-card border-0 shadow-sm h-100">
+                    <div class="product-image-wrapper position-relative">
+                        {% if product.images.exists %}
+                        <img src="{{ product.images.0.image.url }}" alt="{{ product.name }}" class="card-img-top">
+                        {% else %}
+                        <div class="bg-secondary" style="height: 250px;"></div>
+                        {% endif %}
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-title fw-bold">{{ product.name }}</h6>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                {% if product.discount_price %}
+                                <span class="text-warning fw-bold">₹{{ product.discount_price }}</span>
+                                {% else %}
+                                <span class="text-warning fw-bold">₹{{ product.price }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-warning btn-sm add-to-cart-btn" data-product-id="{{ product.id }}">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section bg-warning text-dark py-5">
+    <div class="container text-center">
+        <h2 class="mb-3 fw-bold">Special Offers This Season</h2>
+        <p class="lead mb-4">Get up to 50% off on selected jewelry collections</p>
+        <a href="#products" class="btn btn-dark btn-lg">Explore Deals</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const productId = this.getAttribute('data-product-id');
+        addToCart(productId, 1);
+    });
+});
+
+function addToCart(productId, quantity) {
+    fetch('{% url "cart:add_to_cart" %}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({
+            product_id: productId,
+            quantity: quantity
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            document.getElementById('cart-count').textContent = data.item_count;
+            alert('Product added to cart!');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+{% endblock %}

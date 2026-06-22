@@ -1,0 +1,222 @@
+[
+  {
+    "name": "Pearl & Black Crystal Drop Earrings",
+    "product_type": "western",
+    "price": 199,
+    "mrp": 399,
+    "stock": 50,
+    "is_featured": true,
+    "is_bestseller": true,
+    "is_new": false,
+    "description": "Elegant drop earrings featuring pearl and black crystal stones with sophisticated design"
+  },
+  {
+    "name": "Gold Flower Tassel Drop Earrings",
+    "product_type": "western",
+    "price": 240,
+    "mrp": 449,
+    "stock": 45,
+    "is_featured": true,
+    "is_bestseller": true,
+    "is_new": false,
+    "description": "Beautiful gold flower design with tassel drops, perfect for western wear"
+  },
+  {
+    "name": "Royal Lavender Ghungroo Earrings",
+    "product_type": "ethnic",
+    "price": 349,
+    "mrp": 599,
+    "stock": 40,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": true,
+    "description": "Traditional ethnic ghungroo earrings in royal lavender color with intricate detailing"
+  },
+  {
+    "name": "4-Style Earring Combo Pack",
+    "product_type": "western",
+    "price": 439,
+    "mrp": 799,
+    "stock": 35,
+    "is_featured": true,
+    "is_bestseller": true,
+    "is_new": false,
+    "description": "Versatile combo pack with 4 different western earring styles"
+  },
+  {
+    "name": "White Butterfly Rhinestone Studs",
+    "product_type": "western",
+    "price": 199,
+    "mrp": 349,
+    "stock": 60,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Delicate white butterfly studs adorned with sparkling rhinestones"
+  },
+  {
+    "name": "Gold Arc Crystal Stud Earrings",
+    "product_type": "western",
+    "price": 199,
+    "mrp": 349,
+    "stock": 55,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Modern arc design studs with crystal embellishments in gold tone"
+  },
+  {
+    "name": "Pearl Wing Ear Cuff Earrings",
+    "product_type": "western",
+    "price": 199,
+    "mrp": 349,
+    "stock": 50,
+    "is_featured": false,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Stylish ear cuff earrings with pearl and wing motif"
+  },
+  {
+    "name": "Silver Arch Chandbali - Turquoise",
+    "product_type": "ethnic",
+    "price": 280,
+    "mrp": 499,
+    "stock": 40,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Traditional silver chandbali earrings with turquoise stone inlay"
+  },
+  {
+    "name": "Silver Arch Chandbali - Red",
+    "product_type": "ethnic",
+    "price": 280,
+    "mrp": 499,
+    "stock": 40,
+    "is_featured": false,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Traditional silver chandbali earrings with red stone inlay"
+  },
+  {
+    "name": "Silver Arch Chandbali - Green",
+    "product_type": "ethnic",
+    "price": 280,
+    "mrp": 499,
+    "stock": 40,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Traditional silver chandbali earrings with green stone inlay"
+  },
+  {
+    "name": "Silver Arch Chandbali - Black",
+    "product_type": "ethnic",
+    "price": 280,
+    "mrp": 499,
+    "stock": 40,
+    "is_featured": false,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Traditional silver chandbali earrings with black stone inlay"
+  },
+  {
+    "name": "Silver Arch Chandbali - Lavender",
+    "product_type": "ethnic",
+    "price": 280,
+    "mrp": 499,
+    "stock": 40,
+    "is_featured": false,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Traditional silver chandbali earrings with lavender stone inlay"
+  },
+  {
+    "name": "Silver Arch Chandbali - Maroon",
+    "product_type": "ethnic",
+    "price": 280,
+    "mrp": 499,
+    "stock": 40,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Traditional silver chandbali earrings with maroon stone inlay"
+  },
+  {
+    "name": "Antique Pink Jhumka Earrings",
+    "product_type": "ethnic",
+    "price": 299,
+    "mrp": 549,
+    "stock": 45,
+    "is_featured": true,
+    "is_bestseller": true,
+    "is_new": false,
+    "description": "Classic antique pink jhumka earrings with traditional detailing and pearl embellishments"
+  },
+  {
+    "name": "Purple Bow Heart Drop Earrings",
+    "product_type": "western",
+    "price": 160,
+    "mrp": 299,
+    "stock": 50,
+    "is_featured": false,
+    "is_bestseller": false,
+    "is_new": true,
+    "description": "Cute purple bow heart design drop earrings for casual and party wear"
+  },
+  {
+    "name": "White Floral Hoop Crystal Drop",
+    "product_type": "western",
+    "price": 220,
+    "mrp": 399,
+    "stock": 45,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": false,
+    "description": "Elegant white floral hoop design with crystal drops"
+  },
+  {
+    "name": "Silver Black Onyx Elephant Chandbali",
+    "product_type": "ethnic",
+    "price": 199,
+    "mrp": 399,
+    "stock": 50,
+    "is_featured": false,
+    "is_bestseller": true,
+    "is_new": false,
+    "description": "Unique chandbali earrings with black onyx elephant motif in silver"
+  },
+  {
+    "name": "Antique Gold Ruby Jhumka Earrings",
+    "product_type": "ethnic",
+    "price": 359,
+    "mrp": 599,
+    "stock": 40,
+    "is_featured": true,
+    "is_bestseller": true,
+    "is_new": false,
+    "description": "Luxurious antique gold jhumka earrings with ruby gemstones and intricate work"
+  },
+  {
+    "name": "Black Rose Gold Bow Drop Earrings",
+    "product_type": "western",
+    "price": 199,
+    "mrp": 349,
+    "stock": 50,
+    "is_featured": false,
+    "is_bestseller": false,
+    "is_new": true,
+    "description": "Contemporary black and rose gold bow design drop earrings"
+  },
+  {
+    "name": "Antique Gold Turquoise Jhumka",
+    "product_type": "ethnic",
+    "price": 350,
+    "mrp": 599,
+    "stock": 35,
+    "is_featured": true,
+    "is_bestseller": false,
+    "is_new": true,
+    "description": "Stunning antique gold jhumka earrings with turquoise stone and pearl work"
+  }
+]
